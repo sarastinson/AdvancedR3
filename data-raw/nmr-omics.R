@@ -1,9 +1,13 @@
 # Load necessary packages -------------------------------------------------
 
+usethis::use_package("stringr")
 usethis::use_package("readxl")
 usethis::use_package("dplyr")
 usethis::use_package("tidyr")
+usethis::use_package("snakecase")
 usethis::use_package("here")
+usethis::use_package("fs")
+usethis::use_package("usethis")
 
 # Download dataset --------------------------------------------------------
 
