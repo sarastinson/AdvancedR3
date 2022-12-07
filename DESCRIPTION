@@ -19,6 +19,7 @@ LazyData: true
 Suggests: 
     gitcreds,
     lintr,
-    renv
+    renv,
+    styler
 URL: https://github.com/sarastinson/AdvancedR3
 BugReports: https://github.com/sarastinson/AdvancedR3/issues
