@@ -18,4 +18,5 @@ Depends:
 LazyData: true
 Suggests: 
     gitcreds,
+    lintr,
     renv
