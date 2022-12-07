@@ -1,9 +1,9 @@
 # Load necessary packages -------------------------------------------------
 
-library(readxl)
-library(dplyr)
-library(tidyr)
-library(here)
+usethis::use_package("readxl")
+usethis::use_package("dplyr")
+usethis::use_package("tidyr")
+usethis::use_package("here")
 
 # Download dataset --------------------------------------------------------
 
