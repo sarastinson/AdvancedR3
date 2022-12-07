@@ -5,19 +5,12 @@ editor_options:
     canonical: true
 ---
 
-TODO: Add more to the title of your project here
-
 # AdvancedR3: Reproducible research in R
 
-TODO: Give a brief description of what your project is about
-
-This project is learning reproducible research in R at the advanced
-level.
+This project is about learning reproducible research in R at the
+advanced level.
 
 # Brief description of folder and file contents
-
-TODO: As project evolves, add brief description of what is inside the
-data, doc and R folders.
 
 The following folders contain:
 
