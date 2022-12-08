@@ -11,10 +11,11 @@ format: html
 ---
 
 ```{r setup, include=FALSE}
+targets::tar_config_set(store = 
+                          here::here("_targets"))
 library(tidyverse)
 library(targets)
-lipidomics <- targets::tar_read(lipidomics, 
-                               store = here::here("_targets"))
+lipidomics <- targets::tar_read(lipidomics)
 ```
 
 # Abstract
@@ -33,21 +34,18 @@ Conclusions:
 
 # Results
 ```{r}
-targets::tar_read(df_stats_by_metabolite,
-                  store = here::here("_targets")) %>% 
+targets::tar_read(df_stats_by_metabolite) %>% 
   mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %>%
   select(Metabolite = metabolite, `Mean SD` = MeanSD) %>%
   knitr::kable(caption = "Descriptive statistics of the metabolites.")
 ```
 
 ```{r}
-tar_read(fig_gender_by_class,
-         store = here::here("_targets"))
+tar_read(fig_gender_by_class)
 ```
 
 ```{r}
-tar_read(fig_metabolite_distribution,
-         store = here::here("_targets"))
+tar_read(fig_metabolite_distribution)
 ```
 
 # Conclusions

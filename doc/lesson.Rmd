@@ -41,3 +41,9 @@ metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) +
   facet_wrap(vars(metabolite), scales = "free")
 metabolite_distribution_plot
 ```
+
+## Statistcs
+
+```{r}
+
+```
