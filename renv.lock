@@ -9,6 +9,22 @@
     ]
   },
   "Packages": {
+    "Matrix": {
+      "Package": "Matrix",
+      "Version": "1.5-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "Matrix",
+      "RemoteRef": "Matrix",
+      "RemoteRepos": "https://cran.rstudio.com/",
+      "RemotePkgPlatform": "x86_64-apple-darwin17.0",
+      "RemoteSha": "1.5-3",
+      "Hash": "4006dffe49958d2dd591c17e61e60591",
+      "Requirements": [
+        "lattice"
+      ]
+    },
     "R6": {
       "Package": "R6",
       "Version": "2.5.1",
@@ -27,6 +43,14 @@
         "sys"
       ]
     },
+    "backports": {
+      "Package": "backports",
+      "Version": "1.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c39fbec8a30d23e721980b8afb31984c",
+      "Requirements": []
+    },
     "base64enc": {
       "Package": "base64enc",
       "Version": "0.1-3",
@@ -34,6 +58,22 @@
       "Repository": "CRAN",
       "Hash": "543776ae6848fde2f48ff3816d0628bc",
       "Requirements": []
+    },
+    "base64url": {
+      "Package": "base64url",
+      "Version": "1.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "base64url",
+      "RemoteRef": "base64url",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-apple-darwin17.0",
+      "RemoteSha": "1.4",
+      "Hash": "0c54cf3a08cc0e550fbd64ad33166143",
+      "Requirements": [
+        "backports"
+      ]
     },
     "bslib": {
       "Package": "bslib",
@@ -62,6 +102,17 @@
         "rlang"
       ]
     },
+    "callr": {
+      "Package": "callr",
+      "Version": "3.7.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9b2191ede20fa29828139b9900922e51",
+      "Requirements": [
+        "R6",
+        "processx"
+      ]
+    },
     "cellranger": {
       "Package": "cellranger",
       "Version": "1.1.0",
@@ -87,6 +138,14 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "3f038e5ac7f41d4ac41ce658c85e3042",
+      "Requirements": []
+    },
+    "codetools": {
+      "Package": "codetools",
+      "Version": "0.2-18",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "019388fc48e48b3da0d3a76ff94608a8",
       "Requirements": []
     },
     "cpp11": {
@@ -125,6 +184,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "0eb86baa62f06e8855258fa5a8048667",
+      "Requirements": []
+    },
+    "data.table": {
+      "Package": "data.table",
+      "Version": "1.14.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "data.table",
+      "RemoteRef": "data.table",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-apple-darwin17.0",
+      "RemoteSha": "1.14.6",
+      "Hash": "aecef50008ea7b57c76f1cb5c127fb02",
       "Requirements": []
     },
     "desc": {
@@ -322,6 +395,25 @@
         "openssl"
       ]
     },
+    "igraph": {
+      "Package": "igraph",
+      "Version": "1.3.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "igraph",
+      "RemoteRef": "igraph",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-apple-darwin17.0",
+      "RemoteSha": "1.3.5",
+      "Hash": "132b06d7060f11ba8b4c7e7f385e9b7a",
+      "Requirements": [
+        "Matrix",
+        "magrittr",
+        "pkgconfig",
+        "rlang"
+      ]
+    },
     "ini": {
       "Package": "ini",
       "Version": "0.3.1",
@@ -361,6 +453,14 @@
         "xfun",
         "yaml"
       ]
+    },
+    "lattice": {
+      "Package": "lattice",
+      "Version": "0.20-45",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b64cdbb2b340437c4ee047a1f4c4377b",
+      "Requirements": []
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -443,6 +543,17 @@
       "Hash": "95ef9167b75dde9d2ccc3c7528393e7e",
       "Requirements": []
     },
+    "processx": {
+      "Package": "processx",
+      "Version": "3.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a33ee2d9bf07564efb888ad98410da84",
+      "Requirements": [
+        "R6",
+        "ps"
+      ]
+    },
     "progress": {
       "Package": "progress",
       "Version": "1.2.2",
@@ -455,6 +566,14 @@
         "hms",
         "prettyunits"
       ]
+    },
+    "ps": {
+      "Package": "ps",
+      "Version": "1.7.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "68dd03d98a5efd1eb3012436de45ba83",
+      "Requirements": []
     },
     "purrr": {
       "Package": "purrr",
@@ -609,6 +728,36 @@
       "Repository": "CRAN",
       "Hash": "34c16f1ef796057bfa06d3f4ff818a5d",
       "Requirements": []
+    },
+    "targets": {
+      "Package": "targets",
+      "Version": "0.14.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "targets",
+      "RemoteRef": "targets",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-apple-darwin17.0",
+      "RemoteSha": "0.14.1",
+      "Hash": "6e092c00e6093177f52ec5677ee2038c",
+      "Requirements": [
+        "R6",
+        "base64url",
+        "callr",
+        "cli",
+        "codetools",
+        "data.table",
+        "digest",
+        "igraph",
+        "knitr",
+        "rlang",
+        "tibble",
+        "tidyselect",
+        "vctrs",
+        "withr",
+        "yaml"
+      ]
     },
     "tibble": {
       "Package": "tibble",
