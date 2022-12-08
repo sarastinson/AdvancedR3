@@ -9,6 +9,7 @@ Depends:
 Imports:
     dplyr,
     fs,
+    ggplot2,
     here,
     knitr,
     readr,

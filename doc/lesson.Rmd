@@ -11,7 +11,9 @@ editor_options:
 ```{r setup, include=FALSE}
 library(tidyverse)
 source(here::here("R/functions.R"))
-load(here::here("data/lipidomics.rda"))
+lipidomics <- readr::read_csv(here::here("data/lipidomics.csv"),
+  show_col_types = FALSE
+)
 ```
 
 ## Basic statistics
@@ -23,16 +25,49 @@ lipidomics %>%
   mutate(across(where(is.numeric), round, digits = 1))
 ```
 
-```{r basic-stats create function}
-#' Perform summary statistics
+## Figures
+
+```{r create-fig-1}
+gender_by_class_plot <- lipidomics %>%
+  distinct(code, gender, class) %>%
+  ggplot(aes(x = class, fill = gender)) +
+  geom_bar(position = "dodge")
+gender_by_class_plot
+```
+
+```{r create-fig-2}
+metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) +
+  geom_histogram() +
+  facet_wrap(vars(metabolite), scales = "free")
+metabolite_distribution_plot
+```
+
+```{r}
+
+#' Make plot of gender
 #'
 #' @param data Lipidomics dataset
 #'
-#' @return A data.frame/tibble
-descriptive_stats <- function(data) {
+#' @return A plot object
+plot_count_stats <- function(data) {
   data %>%
-    dplyr::group_by(metabolite) %>%
-    dplyr::summarise(across(value, list(mean = mean, sd = sd))) %>%
-    dplyr::mutate(across(tidyselect::where(is.numeric), round, digits = 1))
+    dplyr::distinct(code, gender, class) %>%
+    ggplot2::ggplot(aes(x = class, fill = gender)) +
+    ggplot2::geom_bar(position = "dodge")
+}
+```
+
+```{r}
+
+#' Make plot of ddistributions by metabolites
+#'
+#' @param data Lipiddomics dataset
+#'
+#' @return A plot object
+plot_distributions <- function(data) {
+  data %>% 
+  ggplot2::ggplot(aes(x = value)) +
+  ggplot2::geom_histogram() +
+  ggplot2::facet_wrap(vars(metabolite), scales = "free")
 }
 ```
