@@ -27,7 +27,7 @@ lipidomics %>%
 
 ## Figures
 
-```{r create-fig-1}
+```{r create-class-plot}
 gender_by_class_plot <- lipidomics %>%
   distinct(code, gender, class) %>%
   ggplot(aes(x = class, fill = gender)) +
@@ -35,39 +35,9 @@ gender_by_class_plot <- lipidomics %>%
 gender_by_class_plot
 ```
 
-```{r create-fig-2}
+```{r create-dist-plot}
 metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) +
   geom_histogram() +
   facet_wrap(vars(metabolite), scales = "free")
 metabolite_distribution_plot
-```
-
-```{r}
-
-#' Make plot of gender
-#'
-#' @param data Lipidomics dataset
-#'
-#' @return A plot object
-plot_count_stats <- function(data) {
-  data %>%
-    dplyr::distinct(code, gender, class) %>%
-    ggplot2::ggplot(aes(x = class, fill = gender)) +
-    ggplot2::geom_bar(position = "dodge")
-}
-```
-
-```{r}
-
-#' Make plot of ddistributions by metabolites
-#'
-#' @param data Lipiddomics dataset
-#'
-#' @return A plot object
-plot_distributions <- function(data) {
-  data %>% 
-  ggplot2::ggplot(aes(x = value)) +
-  ggplot2::geom_histogram() +
-  ggplot2::facet_wrap(vars(metabolite), scales = "free")
-}
 ```

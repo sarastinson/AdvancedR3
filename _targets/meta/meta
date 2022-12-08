@@ -1,5 +1,9 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 descriptive_stats|function|90d9d1a84a7dd6ea|||||||||||||||
 df_stats_by_metabolite|stem|7650f36a97f4d24e|06bc50c38cf95e77|a62a2503b1181577|1571712024||t19334.4401967836s|a5459509b7332ca9|501|rds|local|vector|||0.03||
+fig_gender_by_class|stem|f970cf8027db52e8|ab3da35e0abf2b38|aecd0e7eb7e929ff|-1588904170||t19334.4721165288s|69473d076908de7a|51699|rds|local|vector|||0.014||
+fig_metabolite_distribution|stem|46c6aad23df67139|fab028a148ebe7e6|890e0cf2d20299dd|1263992679||t19334.4721171557s|83d62f6828638105|80947|rds|local|vector|||0.007||
 file|stem|301125be9d4645ea|6f5a37980713f8c6|ef46db3751d8e999|-1301001980|data/lipidomics.csv|t19334.4212979688s|6f631a918b070454|24313|file|local|vector|||0.009||
 lipidomics|stem|f4539691ffdb9495|7940706ee8ea8eb8|845f6234952721f6|-1170387675||t19334.4274008851s|03f6889c95fdc837|4883|rds|local|vector|||0.431||
+plot_count_stats|function|0c538d9366d70620|||||||||||||||
+plot_distributions|function|400516a791feef0e|||||||||||||||
