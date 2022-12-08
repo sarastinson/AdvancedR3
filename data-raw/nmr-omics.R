@@ -1,13 +1,9 @@
 # Load necessary packages -------------------------------------------------
 
-usethis::use_package("stringr")
-usethis::use_package("readxl")
-usethis::use_package("dplyr")
-usethis::use_package("tidyr")
-usethis::use_package("snakecase")
-usethis::use_package("here")
-usethis::use_package("fs")
-usethis::use_package("usethis")
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(here)
 
 # Download dataset --------------------------------------------------------
 
@@ -74,4 +70,4 @@ lipidomics <- full_join(
 
 # Save to `data/` ---------------------------------------------------------
 
-usethis::use_data(lipidomics, overwrite = TRUE)
+readr::write_csv(lipidomics, here::here("data/lipidomics.csv"))
