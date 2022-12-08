@@ -9,41 +9,55 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
+targets::tar_config_set(store =
+                          here::here("_targets"))
 library(tidyverse)
+library(tidymodels)
+library(targets)
+lipidomics <- targets::tar_read(lipidomics)
 source(here::here("R/functions.R"))
-lipidomics <- readr::read_csv(here::here("data/lipidomics.csv"),
-  show_col_types = FALSE
-)
 ```
 
-## Basic statistics
-
-```{r basic-stats}
-lipidomics %>%
-  group_by(metabolite) %>%
-  summarise(across(value, list(mean = mean, sd = sd))) %>%
-  mutate(across(where(is.numeric), round, digits = 1))
-```
-
-## Figures
-
-```{r create-class-plot}
-gender_by_class_plot <- lipidomics %>%
-  distinct(code, gender, class) %>%
-  ggplot(aes(x = class, fill = gender)) +
-  geom_bar(position = "dodge")
-gender_by_class_plot
-```
-
-```{r create-dist-plot}
-metabolite_distribution_plot <- ggplot(lipidomics, aes(x = value)) +
-  geom_histogram() +
-  facet_wrap(vars(metabolite), scales = "free")
-metabolite_distribution_plot
-```
-
-## Statistcs
+## Building the model
 
 ```{r}
+log_reg_specs <- logistic_reg() %>% 
+  set_engine("glm")
+log_reg_specs
+```
 
+## Excerises
+
+### Linear regresssion model definition
+
+```{r}
+linear_reg_specs <- linear_reg() %>%
+  set_engine("lm")
+linear_reg_specs
+```
+
+```{r}
+lipidomics_wide <- lipidomics %>%
+  mutate(metabolite = snakecase::to_snake_case(metabolite)) %>%
+  pivot_wider(
+    names_from = metabolite,
+    values_from = value,
+    values_fn = mean,
+    names_prefix = "metabolite_"
+  )
+lipidomics_wide
+```
+
+```{r}
+#' Title Metabolite values to snakecase
+#'
+#' @param data Lipidomics dataset.
+#'
+#' @return wide format df.
+metabolite_values_to_snakecase <- function(data) {
+  data %>%
+    dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite))
+}
+lipidomics %>% 
+  metabolite_values_to_snakecase()
 ```

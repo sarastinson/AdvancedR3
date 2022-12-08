@@ -38,3 +38,13 @@ plot_distributions <- function(data) {
     ggplot2::geom_histogram() +
     ggplot2::facet_wrap(vars(metabolite), scales = "free")
 }
+
+#' Title Metabolite values to snakecase
+#'
+#' @param data Lipidomics dataset.
+#'
+#' @return snakecase df.
+metabolite_values_to_snakecase <- function(data) {
+  data %>%
+    dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite))
+}
