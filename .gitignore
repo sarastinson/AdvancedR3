@@ -4,3 +4,5 @@
 .Rbuildignore
 data/lipidomics.csv
 _targets
+
+/.quarto/

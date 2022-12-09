@@ -1,13 +1,15 @@
 ---
-# Uses Quarto metadata: https://quarto.org/docs/journals/authors.html
-title: ""
-author:
-  - name: ""
-    orcid: ""
-    affiliations: 
-        - name: ""
-date: "`r Sys.Date()`"
+title: "Analysis of lipidomics"
 format: html
+author:
+  - name: Sara Stinson
+    orcid: 0000-0000-0000-0000
+    email: sara.stinson@und.ku.dk
+    affiliations:
+      - name: University of Copenhagen
+        address: Street 10
+        city: Copenhagen
+        postal-code: 2200
 ---
 
 ```{r setup, include=FALSE}
@@ -28,11 +30,12 @@ Results:
 
 Conclusions:
 
-# Introduction 
+# Introduction
 
 # Research Design and Methods
 
 # Results
+
 ```{r}
 targets::tar_read(df_stats_by_metabolite) %>% 
   mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %>%
@@ -47,6 +50,7 @@ tar_read(fig_gender_by_class)
 ```{r}
 tar_read(fig_metabolite_distribution)
 ```
+
 ```{r}
 tar_read(df_model_estimates)
 ```
