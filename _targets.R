@@ -50,5 +50,9 @@ list(
   tar_render(
     name = report_rmd,
     path = here::here("doc/report.Rmd")
+  ),
+  tar_target(
+    name = df_model_estimates,
+    command = calculate_estimates(lipidomics)
   )
 )
