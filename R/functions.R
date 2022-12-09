@@ -56,7 +56,7 @@ column_values_to_snakecase <- function(data, cols) {
 #' @param values_fn Take the mean value.
 #'
 #' @return A data.frame in wide format
-metabolites_to_wider <- function(data, values_fn) {
+metabolites_to_wider <- function(data, values_fn = mean) {
   data %>%
     dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite)) %>%
     tidyr::pivot_wider(
@@ -104,4 +104,34 @@ tidy_model_output <- function(workflow_fitted_model) {
   workflow_fitted_model %>%
     workflows::extract_fit_parsnip() %>%
     broom::tidy(exponentiate = TRUE)
+}
+
+#' Convert the long form dataset into a list of wide form data frames.
+#'
+#' @param data The lipidomics dataset.
+#'
+#' @return A list of data frames.
+#'
+split_by_metabolite <- function(data) {
+  data %>%
+    column_values_to_snakecase(metabolite) %>%
+    dplyr::group_split(metabolite) %>%
+    purrr::map(metabolites_to_wider)
+}
+
+#' Generate the results of a model
+#'
+#' @param data The lipidomics dataset.
+#'
+#' @return A data frame.
+#'
+generate_model_results <- function(data) {
+  create_model_workflow(
+    parsnip::logistic_reg() %>%
+      parsnip::set_engine("glm"),
+    data %>%
+      create_recipe_spec(tidyselect::starts_with("metabolite_"))
+  ) %>%
+    parsnip::fit(data) %>%
+    tidy_model_output()
 }
