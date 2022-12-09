@@ -1,8 +1,8 @@
-#' Perform summary statistics
+#' Perform summary statistics.
 #'
-#' @param data Lipidomics dataset
+#' @param data Lipidomics dataset.
 #'
-#' @return A data.frame/tibble
+#' @return A data.frame/tibble.
 descriptive_stats <- function(data) {
   data %>%
     dplyr::group_by(metabolite) %>%
@@ -15,11 +15,11 @@ descriptive_stats <- function(data) {
     dplyr::mutate(across(tidyselect::where(is.numeric), round, digits = 1))
 }
 
-#' Make plot of gender by class
+#' Make plot of gender by class.
 #'
-#' @param data Lipidomics dataset
+#' @param data Lipidomics dataset.
 #'
-#' @return A ggplot object
+#' @return A ggplot object.
 plot_count_stats <- function(data) {
   data %>%
     dplyr::distinct(code, gender, class) %>%
@@ -27,11 +27,11 @@ plot_count_stats <- function(data) {
     ggplot2::geom_bar(position = "dodge")
 }
 
-#' Make plot of distributions by metabolites
+#' Make plot of distributions by metabolites.
 #'
-#' @param data Lipiddomics dataset
+#' @param data Lipiddomics dataset.
 #'
-#' @return A ggplot object
+#' @return A ggplot object.
 plot_distributions <- function(data) {
   data %>%
     ggplot2::ggplot(aes(x = value)) +
@@ -39,12 +39,40 @@ plot_distributions <- function(data) {
     ggplot2::facet_wrap(vars(metabolite), scales = "free")
 }
 
-#' Title Metabolite values to snakecase
+#' Convert column value to strings into snakecase.
 #'
-#' @param data Lipidomics dataset.
+#' @param data Data with string columns.
+#' @param cols Columns to convert into snakecase.
 #'
-#' @return snakecase df.
-metabolite_values_to_snakecase <- function(data) {
+#' @return A data.frame.
+column_values_to_snakecase <- function(data, cols) {
   data %>%
-    dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite))
+    dplyr::mutate(dplyr::across({{ cols }}, snakecase::to_snake_case))
+}
+
+#' A transformation recipe to pre-process the data.
+#'
+#' @param data The lipidomics dataset.
+#' @param metabolite_variable The column of the metabolite variable.
+#'
+#' @return
+#'
+create_recipe_spec <- function(data, metabolite_variable) {
+  recipes::recipe(data) %>%
+    recipes::update_role({{ metabolite_variable }}, age, gender, new_role = "predictor") %>%
+    recipes::update_role(class, new_role = "outcome") %>%
+    recipes::step_normalize(tidyselect::starts_with("metabolite_"))
+}
+
+#' Create a workflow object of the model and transformations.
+#'
+#' @param model_specs The model specs
+#' @param recipe_specs The recipe specs
+#'
+#' @return A workflow object
+#'
+create_model_workflow <- function(model_specs, recipe_specs) {
+  workflows::workflow() %>%
+    workflows::add_model(model_specs) %>%
+    workflows::add_recipe(recipe_specs)
 }

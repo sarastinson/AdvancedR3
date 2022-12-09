@@ -9,8 +9,10 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-targets::tar_config_set(store =
-                          here::here("_targets"))
+targets::tar_config_set(
+  store =
+    here::here("_targets")
+)
 library(tidyverse)
 library(tidymodels)
 library(targets)
@@ -21,7 +23,7 @@ source(here::here("R/functions.R"))
 ## Building the model
 
 ```{r}
-log_reg_specs <- logistic_reg() %>% 
+log_reg_specs <- logistic_reg() %>%
   set_engine("glm")
 log_reg_specs
 ```
@@ -49,15 +51,48 @@ lipidomics_wide
 ```
 
 ```{r}
-#' Title Metabolite values to snakecase
+column_values_to_snakecase <- function(data, cols) {
+  data %>%
+    dplyr::mutate(dplyr::across({{ cols }}, snakecase::to_snake_case))
+}
+
+lipidomics %>%
+  metabolite_values_to_snakecase()
+```
+
+```{r}
+
+#' Convert data.frame from long to wide.
 #'
 #' @param data Lipidomics dataset.
+#' @param values_fn Take the mean value.
 #'
-#' @return wide format df.
-metabolite_values_to_snakecase <- function(data) {
+#' @return A data.frame in wide format
+metabolites_to_wider <- function(data, values_fn) {
   data %>%
-    dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite))
+    dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite)) %>%
+    tidyr::pivot_wider(
+      names_from = metabolite,
+      values_from = value,
+      values_fn = values_fn,
+      names_prefix = "metabolite_"
+    )
 }
-lipidomics %>% 
-  metabolite_values_to_snakecase()
+```
+
+## Transforming data
+
+```{r}
+recipe_specs <- lipidomics_wide %>%
+  create_recipe_spec(metabolite_cholesterol)
+recipe_specs
+```
+
+```{r}
+
+create_model_workflow <- function(model_specs, recipe_specs) {
+  worflows::workflow() %>%
+    workflows::add_model(model_specs) %>%
+    woorkflows::add_recipe(recipe_specs)
+}
 ```
