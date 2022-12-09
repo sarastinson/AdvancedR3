@@ -47,6 +47,13 @@ tar_read(fig_gender_by_class)
 ```{r}
 tar_read(fig_metabolite_distribution)
 ```
+```{r}
+tar_read(df_model_estimates)
+```
+
+```{r}
+tar_read(fig_model_estimates)
+```
 
 # Conclusions
 
