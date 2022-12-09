@@ -50,6 +50,23 @@ column_values_to_snakecase <- function(data, cols) {
     dplyr::mutate(dplyr::across({{ cols }}, snakecase::to_snake_case))
 }
 
+#' Convert data.frame from long to wide.
+#'
+#' @param data Lipidomics dataset.
+#' @param values_fn Take the mean value.
+#'
+#' @return A data.frame in wide format
+metabolites_to_wider <- function(data, values_fn) {
+  data %>%
+    dplyr::mutate(metabolite = snakecase::to_snake_case(metabolite)) %>%
+    tidyr::pivot_wider(
+      names_from = metabolite,
+      values_from = value,
+      values_fn = values_fn,
+      names_prefix = "metabolite_"
+    )
+}
+
 #' A transformation recipe to pre-process the data.
 #'
 #' @param data The lipidomics dataset.
@@ -75,4 +92,16 @@ create_model_workflow <- function(model_specs, recipe_specs) {
   workflows::workflow() %>%
     workflows::add_model(model_specs) %>%
     workflows::add_recipe(recipe_specs)
+}
+
+#' Create a tidy output of the model results.
+#'
+#' @param workflow_fitted_model The model workflow object that has been fitted.
+#'
+#' @return A data frame.
+#'
+tidy_model_output <- function(workflow_fitted_model) {
+  workflow_fitted_model %>%
+    workflows::extract_fit_parsnip() %>%
+    broom::tidy(exponentiate = TRUE)
 }
