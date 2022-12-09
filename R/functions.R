@@ -135,3 +135,19 @@ generate_model_results <- function(data) {
     parsnip::fit(data) %>%
     tidy_model_output()
 }
+
+#' Add the original metabolite names (not as snakecase) to the model results.
+#'
+#' @param model_results The data frame with the model results.
+#' @param data The original lipidomics dataset.
+#'
+#' @return A data frame.
+#'
+add_original_metabolite_names <- function(model_results, data) {
+  data %>%
+    dplyr::mutate(term = metabolite) %>%
+    column_values_to_snakecase(term) %>%
+    dplyr::mutate(term = stringr::str_c("metabolite_", term)) %>%
+    dplyr::distinct(term, metabolite) %>%
+    dplyr::right_join(model_results, by = "term")
+}
